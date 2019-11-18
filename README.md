@@ -3,19 +3,27 @@ A Deep Learning model that detects paper corners in pictures / videos
 
 ### Domain Backround
 
-supervised learning
+Mobile Scanners often use computer vision(ex. OpenCv) to detect corners of a scanned paper images in their smartphone apps. The main reasons are that the solution works well on basic cases and secondly it is easily deployable for real time usage (doesn't require a lot of hardware compute). 
 
-keypoints / landmark detection
+I had the opportunity to find an available dataset that tackles this case. It consists of hundred of videos. For each video there is an xml file that contains 8 tags for each video frame (check dataset details in Datasets and Inputs). The tags represent the x,y coordinates of 4 corners of a document (check image).
 
-Convolutional neural networks
+![vdeo dataset](images/papervid.gif)
+
+My main motivation for this project is to check if training a Deep Neural Network on this dataset can showcase good results in real time scenario by detecting image corners (check image).
+
+![Image with red keypoints corners](images/imagecorners.png)
 
 ### Problem Statement
 
-Image scanner that detects Paper corners in Image / video using a CNN model
+Image scanner that detects Paper/document corners in Image / video using a CNN model
 
 The idea is to help a user by using an A.I. algorithm to better detect a Scan corners in image papers.
 
 There are 4 corners positions to detect of a paper document (Top left, Top right, Bottom left, Bottom right) in different backgrounds.
+
+Some of the most popular similar usecases available in Open Source community are Facial/hand Keypoint Detection, Human pose estimation ...
+
+In Machine Learning terms this is a Regression task that is also known as keypoints / landmark detection. The model takes a resized Gray image with size (,,1) as input and produces the expected output that is the x,y coordinates of the 4 corners of a document.
 
 ### Datasets and Inputs
 
