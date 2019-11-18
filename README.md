@@ -15,25 +15,130 @@ My main motivation for this project is to check if training a Deep Neural Networ
 
 ### Problem Statement
 
-Image scanner that detects Paper/document corners in Image / video using a CNN model
-
-The idea is to help a user by using an A.I. algorithm to better detect a Scan corners in image papers.
+Image scanner that detects Paper/document corners in Image / video using a Convolution Neural Networks model
 
 There are 4 corners positions to detect of a paper document (Top left, Top right, Bottom left, Bottom right) in different backgrounds.
 
 Some of the most popular similar usecases available in Open Source community are Facial/hand Keypoint Detection, Human pose estimation ...
 
-In Machine Learning terms this is a Regression task that is also known as keypoints / landmark detection. The model takes a resized Gray image with size (,,1) as input and produces the expected output that is the x,y coordinates of the 4 corners of a document.
+In Machine Learning terms this is a Regression task that is also known as keypoints / landmark detection. The model takes a resized Gray image with size (300,350,1) as input and produces the expected output that is the x,y coordinates of the 4 corners of a document.
 
 ### Datasets and Inputs
 
-Dataset resources are from (link)[https://sites.google.com/site/icdar15smartdoc/challenge-1/challenge1description] [1]
+The dataset comes from the SMARTDOC 2015 competition (Smartphone Document Capture and OCR Competition) (link)[https://sites.google.com/site/icdar15smartdoc/challenge-1/challenge1description] [1]
 
-The dataset comes from the SMARTDOC 2015 competition (Smartphone Document Capture and OCR Competition)
+The dataset has the following structure:
+    smartdoc-dataset-set/
+    ├── background01
+    │   ├── datasheet001.avi
+    │   ├── datasheet002.avi
+    │   ├── datasheet003.avi
+    │   ├── datasheet004.avi
+    │   ├── datasheet005.avi
+    │   ├── letter001.avi
+    │   ├── letter002.avi
+    │   ├── letter003.avi
+    │   ├── letter004.avi
+    │   ├── letter005.avi
+    │   ├── magazine001.avi
+    │   ├── magazine002.avi
+    │   ├── magazine003.avi
+    │   ├── magazine004.avi
+    │   ├── magazine005.avi
+    │   ├── paper001.avi
+    │   ├── paper002.avi
+    │   ├── paper003.avi
+    │   ├── paper004.avi
+    │   ├── paper005.avi
+    │   ├── patent001.avi
+    │   ├── patent002.avi
+    │   ├── patent003.avi
+    │   ├── patent004.avi
+    │   ├── patent005.avi
+    │   ├── tax001.avi
+    │   ├── tax002.avi
+    │   ├── tax003.avi
+    │   ├── tax004.avi
+    │   └── tax005.avi
+    ├── background02
+    │   ├── datasheet001.avi
+    │   ...
+    │   └── tax005.avi
+    ├── background03
+    │   ...
+    ├── background04
+    │   ...
+    └── background05
+        ...
+        └── tax005.avi
 
-The dataset comes with a complex structure containing videos and metadata inside xmls
+It contains 5 directories(image backgrounds), and 150 video files (AVI container, XVID codec, no audio), where papers are taken from different angles.
 
-It contains paper documents that are pictured in different backgrounds and angles.
+The outpout
+
+The output is given as 150 xml files:
+    smartdoc-dataset-set/
+    ├── background01
+    │   ├── datasheet001.gt.xml
+    │   ├── datasheet002.gt.xml
+    │   ├── datasheet003.gt.xml
+    │   ├── datasheet004.gt.xml
+    │   ├── datasheet005.gt.xml
+    │   ├── letter001.gt.xml
+    │   ├── letter002.gt.xml
+    │   ├── letter003.gt.xml
+    │   ├── letter004.gt.xml
+    │   ├── letter005.gt.xml
+    │   ├── magazine001.gt.xml
+    │   ├── magazine002.gt.xml
+    │   ├── magazine003.gt.xml
+    │   ├── magazine004.gt.xml
+    │   ├── magazine005.gt.xml
+    │   ├── paper001.gt.xml
+    │   ├── paper002.gt.xml
+    │   ├── paper003.gt.xml
+    │   ├── paper004.gt.xml
+    │   ├── paper005.gt.xml
+    │   ├── patent001.gt.xml
+    │   ├── patent002.gt.xml
+    │   ├── patent003.gt.xml
+    │   ├── patent004.gt.xml
+    │   ├── patent005.gt.xml
+    │   ├── tax001.gt.xml
+    │   ├── tax002.gt.xml
+    │   ├── tax003.gt.xml
+    │   ├── tax004.gt.xml
+    │   └── tax005.gt.xml
+    ├── background02
+    │   ├── datasheet001.gt.xml
+    │   ...
+    │   └── tax005.gt.xml
+    ├── background03
+    │   ...
+    ├── background04
+    │   ...
+    └── background05
+        ...
+        └── tax005.gt.xml
+
+Each Xml file contains labeled data of each frame of the corresponding video: 
+
+One frame block looks like :
+"""
+    <frame index="$frame_index" rejected="false">
+      <point name="bl" x="$blx" y="bly"/>
+      <point name="tl" x="$tlx" y="tly"/>
+      <point name="tr" x="$trx" y="try"/>
+      <point name="br" x="$brx" y="bry"/>
+    </frame>
+"""
+where:
+- `$frame_index` is the index of the frame, starting at 1.
+- `$blx` and `$bly` are the coordinates of the bottom left  point of the object
+- `$tlx` and `$tly` are the coordinates of the top    left  point of the object
+- `$trx` and `$try` are the coordinates of the top    right point of the object
+- `$brx` and `$bry` are the coordinates of the bottom right point of the object
+
 
 ### Solution Statement
 
