@@ -147,11 +147,11 @@ where:
 
 The solution consists on :
 
-- Convert the dataset to csv file to prepare it for training
+- Convert the dataset videos to image frames and xml files to a csv dataframe
 
 - Prepare a sample of the Dataset  (around 7000 images), split it to train / validation
 
-- Create a CNN architecture
+- Create a CNN model
 
 - Train the model
 
@@ -159,10 +159,69 @@ The solution consists on :
 
 - Discuss improvements and next steps
 
+A first desired solution would be if the trained model can predict corners on real world images other than those in the dataset.
+
+Next work will consist on using different CNN architectures, using data augmentation, and Transfer Learning
+
+Future work would consist of converting the keypoint to a polygon and prepare a dataset to train using a segmentation methode (ex . Mask-RCNN)
+
+The working method will be deployed in Sagemaker and exposed using lambda / Apigateway, and finally deploy it to a smartphone for real time prediction.
 
 ### Benchmark Model
 
-Similar usecases using Keypoint detection : Facial Keypoint detection
+Similar usecases using Keypoint detection :
+
+The benchmark model I will be using is a CNN model based on the Facial Keypoint detection Model [2]. Basically it takes face images as input and predicts keypoints on face as outputs.
+
+CNN architecture used :
+
+```
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_3 (Conv2D)            (None, 195, 348, 32)      320       
+_________________________________________________________________
+activation_5 (Activation)    (None, 195, 348, 32)      0         
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 97, 174, 32)       0         
+_________________________________________________________________
+dropout_5 (Dropout)          (None, 97, 174, 32)       0         
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 96, 173, 64)       8256      
+_________________________________________________________________
+activation_6 (Activation)    (None, 96, 173, 64)       0         
+_________________________________________________________________
+max_pooling2d_4 (MaxPooling2 (None, 48, 86, 64)        0         
+_________________________________________________________________
+dropout_6 (Dropout)          (None, 48, 86, 64)        0         
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 47, 85, 128)       32896     
+_________________________________________________________________
+activation_7 (Activation)    (None, 47, 85, 128)       0         
+_________________________________________________________________
+max_pooling2d_5 (MaxPooling2 (None, 23, 42, 128)       0         
+_________________________________________________________________
+dropout_7 (Dropout)          (None, 23, 42, 128)       0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 123648)            0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 500)               61824500  
+_________________________________________________________________
+activation_8 (Activation)    (None, 500)               0         
+_________________________________________________________________
+dropout_8 (Dropout)          (None, 500)               0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 500)               250500    
+_________________________________________________________________
+activation_9 (Activation)    (None, 500)               0         
+_________________________________________________________________
+dropout_9 (Dropout)          (None, 500)               0         
+_________________________________________________________________
+dense_5 (Dense)              (None, 8)                 4008      
+=================================================================
+Total params: 62,120,480
+Trainable params: 62,120,480
+Non-trainable params: 0
+```
 
 ### Evaluation Metrics
 
@@ -177,7 +236,9 @@ Evaluation metrics that will be used in the training / validation sets :
 Steps to develop this project:
 
 1- Explore and prepare the dataset
+
 2- Train and deploy the model on Sagemaker
+
 3- Test the model on new images
 
 
