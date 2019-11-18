@@ -7,7 +7,7 @@ Mobile Scanners often use computer vision(ex. OpenCv) to detect corners of a sca
 
 I had the opportunity to find an available dataset that tackles this case. It consists of hundred of videos. For each video there is an xml file that contains 8 tags for each video frame (check dataset details in Datasets and Inputs). The tags represent the x,y coordinates of 4 corners of a document (check image).
 
-![vdeo dataset](images/papervid.gif)
+![image dataset](images/image.png)
 
 My main motivation for this project is to check if training a Deep Neural Network on this dataset can showcase good results in real time scenario by detecting image corners (check image).
 
