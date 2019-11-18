@@ -200,9 +200,9 @@ Steps to develop this project:
 
 - Create train / validation folders containing images
 
-2- Preprocess input to enter to model
+2- Preprocess input shape for model
 
-- Resize image
+- Resize image : decrease the size of the image so that it fits in GPU memory when training (turn to gray and decrease image to final shape : (197,350,1))
 
 - Rescale landmarks/ Keypoints to to the new image size
 
@@ -267,5 +267,7 @@ Non-trainable params: 0
 #### Reference
 
 [1] Jean-Christophe Burie, Joseph Chazalon, Mickaël Coustaty, Sébastien Eskenazi, Muhammad Muzzamil Luqman, Maroua Mehri, Nibal Nayef, Jean-Marc OGIER, Sophea Prum and Marçal Rusinol: “ICDAR2015 Competition on Smartphone Document Capture and OCR (SmartDoc)”, In 13th International Conference on Document Analysis and Recognition (ICDAR), 2015.
+
 [2] https://fairyonice.github.io/achieving-top-23-in-kaggles-facial-keypoints-detection-with-keras-tensorflow.html
+
 [3] https://gitlab.com/juliensimon/dlnotebooks/blob/master/keras/05-keras-blog-post/Fashion%20MNIST-SageMaker.ipynb
