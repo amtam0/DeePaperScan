@@ -28,6 +28,7 @@ In Machine Learning terms this is a Regression task that is also known as keypoi
 The dataset comes from the SMARTDOC 2015 competition (Smartphone Document Capture and OCR Competition) (link)[https://sites.google.com/site/icdar15smartdoc/challenge-1/challenge1description] [1]
 
 The dataset has the following structure:
+
     smartdoc-dataset-set/
     ├── background01
     │   ├── datasheet001.avi
@@ -77,6 +78,7 @@ It contains 5 directories(image backgrounds), and 150 video files (AVI container
 The outpout
 
 The output is given as 150 xml files:
+
     smartdoc-dataset-set/
     ├── background01
     │   ├── datasheet001.gt.xml
@@ -124,14 +126,15 @@ The output is given as 150 xml files:
 Each Xml file contains labeled data of each frame of the corresponding video: 
 
 One frame block looks like :
-"""
+
+```
     <frame index="$frame_index" rejected="false">
       <point name="bl" x="$blx" y="bly"/>
       <point name="tl" x="$tlx" y="tly"/>
       <point name="tr" x="$trx" y="try"/>
       <point name="br" x="$brx" y="bry"/>
     </frame>
-"""
+```
 where:
 - `$frame_index` is the index of the frame, starting at 1.
 - `$blx` and `$bly` are the coordinates of the bottom left  point of the object
