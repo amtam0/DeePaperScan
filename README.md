@@ -21,7 +21,7 @@ There are 4 corners positions to detect of a paper document (Top left, Top right
 
 Some of the most popular similar usecases available in Open Source community are Facial/hand Keypoint Detection, Human pose estimation ...
 
-In Machine Learning terms this is a Regression task that is also known as keypoints / landmark detection. The model takes a resized Gray image with size (300,350,1) as input and produces the expected output that is the x,y coordinates of the 4 corners of a document.
+In Machine Learning terms this is a Regression task that is also known as keypoints / landmark detection. The model takes a resized Gray image with size (197,350,1) as input and produces the expected output that is the x,y coordinates of the 4 corners of a document.
 
 ### Datasets and Inputs
 
@@ -173,7 +173,44 @@ Similar usecases using Keypoint detection :
 
 The benchmark model I will be using is a CNN model based on the Facial Keypoint detection Model [2]. Basically it takes face images as input and predicts keypoints on face as outputs.
 
-CNN architecture used :
+I will be using the same architecture and apply it to the smartdoc Dataset
+
+
+### Evaluation Metrics
+
+The usecase is mainly a Regression problem using images as input.
+
+Evaluation metrics that will be used in the training / validation sets : 
+- loss : mean squared error
+- metrics : mean absolute error
+
+### Project Design
+
+Steps to develop this project:
+
+1- Prepare the dataset
+
+- Convert videos to images and store them in one folder
+
+- Convert all xml files containing target label inside one dataframe
+
+- create a sample of 7000 images from this dataframe
+
+- split to train / validation (99%/1%)
+
+- Create train / validation folders containing images
+
+2- Preprocess input to enter to model
+
+- Resize image
+
+- Rescale landmarks/ Keypoints to to the new image size
+
+3- Train model in Sagemaker using multiple Gpus [3]
+
+- libraries used: Keras (Tensorflow Backend)
+
+- CNN architecture [2] :
 
 ```
 Layer (type)                 Output Shape              Param #   
@@ -223,24 +260,9 @@ Trainable params: 62,120,480
 Non-trainable params: 0
 ```
 
-### Evaluation Metrics
+3- Deploy model on Sagemaker [3]
 
-The usecase is mainly a Regression problem using images as input.
-
-Evaluation metrics that will be used in the training / validation sets : 
-- loss : mean squared error
-- metrics : mean absolute error
-
-### Project Design
-
-Steps to develop this project:
-
-1- Explore and prepare the dataset
-
-2- Train and deploy the model on Sagemaker
-
-3- Test the model on new images
-
+4- Test the model on new images
 
 #### Reference
 
