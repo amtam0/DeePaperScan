@@ -1,6 +1,17 @@
 # DeePaperScan
 A Deep Learning model that detects paper corners in pictures / videos
 
+## Setup
+
+- Clone the directory
+
+- Ask access to dataset (link)[https://sites.google.com/site/icdar15smartdoc/challenge-1/challenge1description] [1]
+
+- Download dataset using Filezilla inside Repository
+
+- Run the notebook DeepPaperScan.ipynb
+
+## Proposal
 ### Domain Backround
 
 Mobile Scanners often use computer vision(ex. OpenCv) to detect corners of a scanned paper images in their smartphone apps. The main reasons are that the solution works well on basic cases and secondly it is easily deployable for real time usage (doesn't require a lot of hardware compute). 
