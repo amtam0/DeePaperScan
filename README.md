@@ -260,9 +260,9 @@ Trainable params: 62,120,480
 Non-trainable params: 0
 ```
 
-3- Deploy model on Sagemaker [3]
+4- Deploy model on Sagemaker [3]
 
-4- Test the model on new images
+5- Test the model on new images
 
 #### Reference
 
